@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.qinkuai.classdemo.model.Homework;
 import com.qinkuai.classdemo.util.FieldUtils;
+import com.qinkuai.classdemo.util.TimeUtils;
 
 public class HomeworkDao {
 	private static HomeworkDao homeworkDao;
@@ -26,7 +27,7 @@ public class HomeworkDao {
 	public void insert(Homework record) {
 		StringBuilder sql = new StringBuilder("insert into homework(sid,taskid,content,upload_time) values('");
 		sql.append(record.getSid()).append("',").append(record.getTaskId()).append(",'")
-		.append(record.getContent()).append("',").append(record.getUploadTime()).append(");");
+		.append(record.getContent()).append("','").append(TimeUtils.dateToString(record.getUploadTime())).append("');");
 		
 		try {
 			JDBCTemplate.opExceptSelect(sql.toString());
@@ -40,24 +41,26 @@ public class HomeworkDao {
 		StringBuilder sql = new StringBuilder("select * from task where id=");
 		sql.append(homeworkId);
 		
-		List<Object> resultList = null;
+		List<List<Object>> resultList = null;
 		try {
-			resultList = JDBCTemplate.opSelect(sql.toString(), homeworkFieldClasses).get(0);
+			resultList = JDBCTemplate.opSelect(sql.toString(), homeworkFieldClasses);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		Homework homework = new Homework();
-		
-		setFields(homework, resultList);
-		
-		return homework;
+		if (resultList.size() > 0) {
+			Homework homework = new Homework();
+			setFields(homework, resultList.get(0));
+			return homework;
+		}else {
+			return null;
+		}
 	}
 	
 	// 通过学生id和任务id查找作业列表
-	public List<Homework> selectByCourseId(String sid, int homeworkId){
+	public List<Homework> selectByCourseId(String sid, int taskId){
 		StringBuilder sql = new StringBuilder("select * from homework where sid='");
-		sql.append(sid).append("' and taskid=").append(homeworkId).append(";");
+		sql.append(sid).append("' and taskid=").append(taskId).append(";");
 		
 		List<List<Object>> resultList = null;
 		try {
@@ -79,6 +82,27 @@ public class HomeworkDao {
 	public List<Homework> selectAll(){
 		StringBuilder sql = new StringBuilder("select * from homework order by id;");
 	
+		List<List<Object>> resultList = null;
+		try {
+			resultList = JDBCTemplate.opSelect(sql.toString(), homeworkFieldClasses);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		List<Homework> homeworks = new ArrayList<>();
+		for (List<Object> list : resultList) {
+			Homework homework = new Homework();
+			setFields(homework, list);
+			homeworks.add(homework);
+		}
+		
+		return homeworks;
+	}
+	
+	// 获取同一任务下的作业列表
+	public List<Homework> selectByTaskId(int taskId){
+		StringBuilder sql = new StringBuilder("select * from homework where taskid=");
+		sql.append(taskId).append(";");
+		
 		List<List<Object>> resultList = null;
 		try {
 			resultList = JDBCTemplate.opSelect(sql.toString(), homeworkFieldClasses);

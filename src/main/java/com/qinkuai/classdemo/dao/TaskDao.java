@@ -17,7 +17,7 @@ public class TaskDao {
 		if (taskDao == null) {
 			taskDao = new TaskDao();
 			taskFieldClasses = new ArrayList<Class<?>>();
-			FieldUtils.getClassFields(taskFieldClasses, TaskDao.class);
+			FieldUtils.getClassFields(taskFieldClasses, Task.class);
 		}
 		return taskDao;
 	}

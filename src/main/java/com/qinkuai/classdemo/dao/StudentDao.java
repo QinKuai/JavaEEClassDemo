@@ -40,27 +40,41 @@ public class StudentDao {
 		StringBuilder sql = new StringBuilder("select * from student where id='");
 		sql.append(id).append("';");
 		
-		List<Object> resultList = null;
+		List<List<Object>> resultList = null;
 		try {
-			resultList = JDBCTemplate.opSelect(sql.toString(), studentFieldClasses).get(0);
+			resultList = JDBCTemplate.opSelect(sql.toString(), studentFieldClasses);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		Student student = new Student();
-		
-		setFields(student, resultList);
-		
-		return student;
+		if (resultList.size() <= 0) {
+			return null;
+		}else {
+			Student student = new Student();
+			setFields(student, resultList.get(0));
+			return student;
+		}
 	}
 	
 	// 获取所有学生信息
 	public List<Student> selectAll(){
 		StringBuilder sql = new StringBuilder("select * from student order by id;");
 	
+		return getStudentList(sql.toString());
+	}
+	
+	// 获取在同一课堂上的学生信息
+	public List<Student> selectByCourseId(String courseId){
+		StringBuilder sql = new StringBuilder("select id,firstName,lastName,sex,class,grade");
+		sql.append(" from student,course_selection where student.id=course_selection.sid and cid='").append(courseId).append("';");
+		
+		return getStudentList(sql.toString());
+	}
+	
+	private List<Student> getStudentList(String sql){
 		List<List<Object>> resultList = null;
 		try {
-			resultList = JDBCTemplate.opSelect(sql.toString(), studentFieldClasses);
+			resultList = JDBCTemplate.opSelect(sql, studentFieldClasses);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

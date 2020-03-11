@@ -1,19 +1,17 @@
 package com.qinkuai.test;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
-import com.qinkuai.classdemo.dao.HomeworkDao;
-import com.qinkuai.classdemo.dao.StudentDao;
-import com.qinkuai.classdemo.model.Homework;
+import com.qinkuai.classdemo.dao.CourseSelectionDao;
 import com.qinkuai.classdemo.model.Student;
+import com.qinkuai.classdemo.util.TimeUtils;
 
 public class Test {
 	
 	public static void main(String[] args) throws Exception{
-		for (Homework homework : HomeworkDao.getInstance().selectAll()) {
-			System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(homework.getUploadTime()));
-		}
-		
+		System.out.println(Calendar.getInstance().getTime());
+		System.out.println(TimeUtils.dateToString(Calendar.getInstance().getTime()));
 	}
 	
 }

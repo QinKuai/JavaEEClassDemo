@@ -9,10 +9,16 @@
 		<servlet-class>com.qinkuai.classdemo.service.MainServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
+	
 	<servlet>
-		<servlet-name>StudentListServlet</servlet-name>
-		<servlet-class>com.qinkuai.classdemo.service.StudentListServlet</servlet-class>
+		<servlet-name>CourseDetailServlet</servlet-name>
+		<servlet-class>com.qinkuai.classdemo.service.CourseDetailServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	  
+	<servlet>
+		<servlet-name>AddTaskServlet</servlet-name>
+		<servlet-class>com.qinkuai.classdemo.service.AddTaskServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
@@ -22,8 +28,13 @@
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>StudentListServlet</servlet-name>
-		<url-pattern>/list</url-pattern>
+		<servlet-name>CourseDetailServlet</servlet-name>
+		<url-pattern>/course-detail</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AddTaskServlet</servlet-name>
+		<url-pattern>/add-task</url-pattern>
 	</servlet-mapping>
 
 </web-app>
