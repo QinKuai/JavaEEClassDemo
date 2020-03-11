@@ -1,10 +1,10 @@
 package com.qinkuai.classdemo.dao;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.qinkuai.classdemo.model.Student;
+import com.qinkuai.classdemo.util.FieldUtils;
 
 public class StudentDao {
 	private static StudentDao studentDao;
@@ -16,25 +16,29 @@ public class StudentDao {
 		if (studentDao == null) {
 			studentDao = new StudentDao();
 			studentFieldClasses = new ArrayList<Class<?>>();
-			for (Field field : Student.class.getDeclaredFields()) {
-				studentFieldClasses.add(field.getType());
-			}
+			FieldUtils.getClassFields(studentFieldClasses, Student.class);
 		}
 		return studentDao;
 	}
 	
 	// 插入学生信息
-	//public int insert(Student record) {
-	//	StringBuilder sql = new StringBuilder();
+	public void insert(Student record) {
+		StringBuilder sql = new StringBuilder("insert into student values('");
+		sql.append(record.getId()).append("','").append(record.getFirstName()).append("','")
+		.append(record.getLastName()).append("','").append(record.getSex()).append("','")
+		.append(record.getClassName()).append("','").append(record.getGrade()).append("');");
 		
-		
-		
-	//}
+		try {
+			JDBCTemplate.opExceptSelect(sql.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	// 通过学生学号查找学生信息
 	public Student selectById(String id) {
-		StringBuilder sql = new StringBuilder("select * from student where id=");
-		sql.append(id);
+		StringBuilder sql = new StringBuilder("select * from student where id='");
+		sql.append(id).append("';");
 		
 		List<Object> resultList = null;
 		try {
@@ -45,14 +49,14 @@ public class StudentDao {
 		
 		Student student = new Student();
 		
-		setStudentFields(student, resultList);
+		setFields(student, resultList);
 		
 		return student;
 	}
 	
 	// 获取所有学生信息
 	public List<Student> selectAll(){
-		StringBuilder sql = new StringBuilder("select * from student order by id");
+		StringBuilder sql = new StringBuilder("select * from student order by id;");
 	
 		List<List<Object>> resultList = null;
 		try {
@@ -63,7 +67,7 @@ public class StudentDao {
 		List<Student> students = new ArrayList<>();
 		for (List<Object> list : resultList) {
 			Student student = new Student();
-			setStudentFields(student, list);
+			setFields(student, list);
 			students.add(student);
 		}
 		
@@ -71,7 +75,7 @@ public class StudentDao {
 	}
 	
 	// 设置学生信息
-	private void setStudentFields(Student student, List<Object> list) {
+	private void setFields(Student student, List<Object> list) {
 		student.setId((String)list.get(0));
 		student.setFirstName((String)list.get(1));
 		student.setLastName((String)list.get(2));

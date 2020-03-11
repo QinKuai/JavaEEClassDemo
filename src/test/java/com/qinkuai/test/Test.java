@@ -1,25 +1,19 @@
 package com.qinkuai.test;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
 
+import com.qinkuai.classdemo.dao.HomeworkDao;
+import com.qinkuai.classdemo.dao.StudentDao;
+import com.qinkuai.classdemo.model.Homework;
 import com.qinkuai.classdemo.model.Student;
 
 public class Test {
 	
 	public static void main(String[] args) throws Exception{
-		List<String> list = new ArrayList<>();
-		
-		list.add("Zhang");
-		list.add("Wen");
-		list.add("Qinkuai");
-		
-		for (String string : list) {
-			System.out.println(string);
+		for (Homework homework : HomeworkDao.getInstance().selectAll()) {
+			System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(homework.getUploadTime()));
 		}
 		
 	}
 	
-
 }
