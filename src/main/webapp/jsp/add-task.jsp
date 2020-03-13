@@ -16,15 +16,13 @@
 </head>
 <body>
 	<h1><%=courseId %>-添加新任务</h1>
-	<b>任务内容：</b><input type="text"><br><br>
-	<b>开始时间：</b><input type="datetime"><br><br>
-	<b>持续时间(h)：</b><input type="text"><br><br>
-	<input type="submit" onclick="submitTask()">
+	<form action="add-task" method="post">
+	<input type="text" name="cid" style="display:none" value=<%=courseId %>>
+	<b>任务内容：</b><input type="text" name="content"><br><br>
+	<b>开始时间(yyyy-MM-dd HH:mm:ss)：</b><input type="datetime" name="upload_time"><br><br>
+	<b>持续时间(h)：</b><input type="text" name="time_last"><br><br>
+	<input type="submit" value="上传任务">
+	</form>
 	
-	<script type="text/javascript">
-		function submitTask(){
-			
-		}
-	</script>
 </body>
 </html>

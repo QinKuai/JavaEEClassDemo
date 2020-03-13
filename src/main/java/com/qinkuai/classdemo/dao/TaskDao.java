@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.qinkuai.classdemo.model.Task;
 import com.qinkuai.classdemo.util.FieldUtils;
+import com.qinkuai.classdemo.util.TimeUtils;
 
 public class TaskDao {
 	private static TaskDao taskDao;
@@ -24,10 +25,10 @@ public class TaskDao {
 	
 	// 插入任务信息
 	public void insert(Task record) {
-		StringBuilder sql = new StringBuilder("insert into task(cid,cotent,upload_time,start_time,time_last) values(");
-		sql.append(record.getId()).append(",'").append(record.getCid()).append("','")
-		.append(record.getContent()).append("',").append(record.getUploadTime()).append(",")
-		.append(record.getStartTime()).append(",").append(record.getTimeLast()).append(");");
+		StringBuilder sql = new StringBuilder("insert into task(cid,content,upload_time,start_time,time_last) values('");
+		sql.append(record.getCid()).append("','").append(record.getContent()).append("','")
+		.append(TimeUtils.dateToString(record.getUploadTime())).append("','")
+		.append(TimeUtils.dateToString(record.getStartTime())).append("',").append(record.getTimeLast()).append(");");
 		
 		try {
 			JDBCTemplate.opExceptSelect(sql.toString());

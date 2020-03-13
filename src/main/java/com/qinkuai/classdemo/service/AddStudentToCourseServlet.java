@@ -10,17 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.qinkuai.classdemo.dao.CourseSelectionDao;
 import com.qinkuai.classdemo.dao.StudentDao;
+import com.qinkuai.classdemo.model.CourseSelection;
 import com.qinkuai.classdemo.model.Student;
+import com.qinkuai.classdemo.util.ApplicationProperties;
 
 @WebServlet("/add-student-to-course")
 public class AddStudentToCourseServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Student student = StudentDao.getInstance().selectById(req.getParameter("sid"));
-		String cid = req.getParameter("courseId");
-		if (student != null) {
+		String cid = req.getParameter("cid");
+		
+		if (student != null && !CourseSelectionDao.getInstance().isCourseSelected(cid, student.getId())) {
 			CourseSelectionDao.getInstance().insert(cid, student.getId(), 0);
 		}
-		super.doPost(req, resp);
+		req.setAttribute("courseId", cid);
+		resp.sendRedirect("course-detail");
 	}
 }

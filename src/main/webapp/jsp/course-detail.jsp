@@ -34,9 +34,12 @@
 			} 
 		%>
 	</table>
+	<form action="add-student-to-course" method="post">
 	<b>输入学生学号添加学生：</b>
-	<input type="text">
-	<button>添加学生</button>
+	<input type="text" name="cid" style="display:none" value=<%=courseId %>>
+	<input type="text" name="sid">
+	<input type="submit" value="添加学生" >
+	</form>
 	
 	<h2>任务列表</h2>
 	<table border="1">
