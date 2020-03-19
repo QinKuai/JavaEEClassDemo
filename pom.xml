@@ -5,14 +5,9 @@
 	<groupId>com.qinkuai</groupId>
 	<artifactId>classdemo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 
 	<dependencies>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.18</version>
-		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -48,4 +43,8 @@
 			</plugin>
 		</plugins>
 	</build>
+	<modules>
+		<module>core</module>
+		<module>web-service</module>
+	</modules>
 </project>
