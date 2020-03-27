@@ -1,4 +1,4 @@
-package com.qinkuai.webservice.service;
+package com.qinkuai.webservice.oldversion;
 
 import java.io.IOException;
 import java.text.ParseException;
