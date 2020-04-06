@@ -12,7 +12,6 @@ import com.qinkuai.core.dao.CourseSelectionDao;
 import com.qinkuai.core.dao.StudentDao;
 import com.qinkuai.core.model.Student;
 
-@WebServlet("/add-student-to-course")
 public class AddStudentToCourseServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

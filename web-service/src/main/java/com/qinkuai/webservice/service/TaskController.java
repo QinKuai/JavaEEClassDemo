@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,8 @@ import com.qinkuai.core.util.TimeUtils;
 
 @Controller
 public class TaskController {
+	@Autowired
+	private TaskDao taskDao;
 	
 	@RequestMapping(value = "task-detail", method = RequestMethod.GET)
 	public String taskDetail(HttpServletRequest request, HttpServletResponse response) {
@@ -26,6 +29,13 @@ public class TaskController {
 		return "task-detail";
 	}
 	
+	@RequestMapping(value = "/add-task", method = RequestMethod.GET)
+	public String addTaskPage(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("courseId", "RJZ001_01");
+		return "add-task";
+	}
+	
+	@RequestMapping(value = "add-task", method = RequestMethod.POST)
 	public void addTask(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		request.setCharacterEncoding("utf8");
 		Task task = new Task();
@@ -39,7 +49,7 @@ public class TaskController {
 		}
 		task.setTimeLast(Integer.valueOf(request.getParameter("time_last")));
 		
-		TaskDao.getInstance().insert(task);
+		taskDao.insert(task);
 		
 		response.sendRedirect("course-detail");
 	}

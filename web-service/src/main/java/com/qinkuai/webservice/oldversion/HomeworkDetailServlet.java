@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.qinkuai.core.util.ApplicationProperties;
 
-@WebServlet("/homework-detail")
 public class HomeworkDetailServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

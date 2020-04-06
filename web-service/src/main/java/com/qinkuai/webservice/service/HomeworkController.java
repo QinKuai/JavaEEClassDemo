@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,12 +17,20 @@ import com.qinkuai.core.model.Homework;
 
 @Controller
 public class HomeworkController {
+	@Autowired
+	private HomeworkDao homeworkDao;
+	
 	@RequestMapping(value = "/homework-detail", method = RequestMethod.GET)
 	public String homeworkDetail(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("cid", "RJZ001_01");
 		request.setAttribute("sid", "17301087");
 		request.setAttribute("taskid", 1);
 		return "homework-detail";
+	}
+	
+	@RequestMapping(value = "/add-homework", method = RequestMethod.GET)
+	public String addHomeworkPage() {
+		return "add-homework";
 	}
 	
 	@RequestMapping(value = "/add-homework", method =  RequestMethod.POST)
@@ -33,7 +42,7 @@ public class HomeworkController {
 		homework.setContent(request.getParameter("content"));
 		homework.setUploadTime(Calendar.getInstance().getTime());
 		
-		HomeworkDao.getInstance().insert(homework);
+		homeworkDao.insert(homework);
 		
 		response.sendRedirect("task-detail");
 	}

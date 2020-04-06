@@ -14,7 +14,6 @@ import com.qinkuai.core.dao.HomeworkDao;
 import com.qinkuai.core.model.Homework;
 import com.qinkuai.core.util.ApplicationProperties;
 
-@WebServlet("/add-homework")
 public class AddHomeworkServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
