@@ -6,11 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+
 /**
  * @author QinKuai
  * 创建时间：2020年3月26日
  * 描述：
- * 除去Web配置之外的Spring其他配置信息
+ * 等效于spring的xml配置
  */
 @Configuration
 @ComponentScan(excludeFilters = {

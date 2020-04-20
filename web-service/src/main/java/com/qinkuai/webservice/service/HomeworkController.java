@@ -24,12 +24,14 @@ public class HomeworkController {
 	public String homeworkDetail(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("cid", "RJZ001_01");
 		request.setAttribute("sid", "17301087");
-		request.setAttribute("taskid", 1);
+		request.setAttribute("taskId", 1);
 		return "homework-detail";
 	}
 	
 	@RequestMapping(value = "/add-homework", method = RequestMethod.GET)
-	public String addHomeworkPage() {
+	public String addHomeworkPage(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("sid", "17301087");
+		request.setAttribute("taskId", 1);
 		return "add-homework";
 	}
 	

@@ -28,7 +28,7 @@ public class CourseController {
 		
 		return "course-detail";
 	}
-	
+
 	@RequestMapping(value = "/add-student-to-course")
 	public void addStudentToCourse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		Student student = studentDao.selectById(request.getParameter("sid"));
@@ -40,4 +40,7 @@ public class CourseController {
 		request.setAttribute("courseId", cid);
 		response.sendRedirect("course-detail");
 	}
+	
+	
+	
 }

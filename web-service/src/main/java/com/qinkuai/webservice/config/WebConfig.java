@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.validation.Validator;
@@ -23,14 +24,13 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  * 描述：
  * springmvc的基本配置
  * Java代码配置
- * 等效于以前web.xml
+ * 等效于以前springmvc的xml配置
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.qinkuai.webservice.service")
+@EnableAspectJAutoProxy
+@ComponentScan(basePackages = {"com.qinkuai.webservice.service", "com.qinkuai.webservice.aspect"})
 public class WebConfig implements WebMvcConfigurer{
-	
-	
 	/**
 	 * 描述：
 	 * 配置HTML的视图解析器
@@ -88,6 +88,4 @@ public class WebConfig implements WebMvcConfigurer{
 	public Validator getValidator() {
 		return new LocalValidatorFactoryBean();
 	}
-	
-	
 }

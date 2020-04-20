@@ -1,9 +1,15 @@
 package com.qinkuai.webservice;
 
-import com.qinkuai.core.util.ApplicationProperties;
+import java.util.List;
+
+import com.qinkuai.core.dao.TaskDao;
+import com.qinkuai.core.model.Task;
 
 public class TestCore {
 	public static void main(String[] args) {
-		System.out.println(ApplicationProperties.getInstance().getProperty("static-path"));
+		List<Task> tasks = TaskDao.getInstance().selectByCourseId("RJZ001_01");
+		for (Task task : tasks) {
+			System.out.println(task);
+		}
 	}
 }
