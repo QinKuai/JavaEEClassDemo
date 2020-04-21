@@ -45,9 +45,12 @@ public class CourseController {
 		Student student = studentDao.selectById(request.getParameter("sid"));
 		String cid = request.getParameter("cid");
 		
+		courseSelectionDao.insert("RJZ002_01", "0000000", 70);
+		
 		if (student != null && !courseSelectionDao.isCourseSelected(cid, student.getId())) {
 			courseSelectionDao.insert(cid, student.getId(), 0);
 		}
+		
 		request.setAttribute("courseId", cid);
 		response.sendRedirect("course-detail");
 	}

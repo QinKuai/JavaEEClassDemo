@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionManager;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
@@ -17,6 +19,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import com.qinkuai.core.dao.DataBaseCP;
 
 /**
  * @author QinKuai
@@ -29,7 +33,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @EnableWebMvc
 @EnableAspectJAutoProxy
-@ComponentScan(basePackages = {"com.qinkuai.webservice.service", "com.qinkuai.webservice.aspect"})
+@ComponentScan(basePackages = {"com.qinkuai.webservice.service", "com.qinkuai.webservice.aspect", "com.qinkuai.webservice.util"})
 public class WebConfig implements WebMvcConfigurer{
 	/**
 	 * 描述：
@@ -87,5 +91,10 @@ public class WebConfig implements WebMvcConfigurer{
 	@Override
 	public Validator getValidator() {
 		return new LocalValidatorFactoryBean();
+	}
+	
+	@Bean
+	public DataSourceTransactionManager transactionManager() {
+		return new DataSourceTransactionManager(DataBaseCP.getConnectionPool());
 	}
 }

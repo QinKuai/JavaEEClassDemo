@@ -6,8 +6,8 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class CourseControllerAspect {
 	@Pointcut("execution(** com.qinkuai.webservice.service.CourseController.*(..))")
 	public void course() {}

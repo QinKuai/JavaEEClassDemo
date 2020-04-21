@@ -13,6 +13,7 @@
 	
 	<properties>
 		<aspect-version>1.9.5</aspect-version>
+		<spring-version>5.2.4.RELEASE</spring-version>
 	</properties>
 
 	<dependencies>
@@ -24,7 +25,12 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>5.2.4.RELEASE</version>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.validation</groupId>
