@@ -1,8 +1,6 @@
-<%@page import="com.qinkuai.core.dao.HomeworkDao"%>
 <%@page import="com.qinkuai.core.model.Homework"%>
 <%@page import="com.qinkuai.core.model.Student"%>
 <%@page import="com.qinkuai.core.util.TimeUtils"%>
-<%@page import="com.qinkuai.core.dao.TaskDao"%>
 <%@page import="com.qinkuai.core.model.Task"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,12 +11,12 @@
 <meta charset="UTF-8">
 <%
 	String courseId = (String) request.getAttribute("cid");
-	Integer taskId = (Integer) request.getAttribute("taskid");
+	Task task = (Task)request.getAttribute("task");
+	List<Homework> homeworks = (List<Homework>)request.getAttribute("homeworks");
 %>
 <title><%=courseId%>-作业详情</title>
 </head>
 <body>
-	<%Task task = TaskDao.getInstance().selectById(taskId); %>
 	<h2>任务内容</h2><br>
 	<b><%=task.getContent() %></b>
 	<h2>上传时间</h2>
@@ -35,7 +33,6 @@
 		</tr>
 		
 		<%
-			List<Homework> homeworks = HomeworkDao.getInstance().selectByTaskId(taskId);
 			for(Homework homework: homeworks){
 		%>
 		<tr>

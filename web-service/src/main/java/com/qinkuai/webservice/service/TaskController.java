@@ -3,6 +3,7 @@ package com.qinkuai.webservice.service;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.qinkuai.core.dao.HomeworkDao;
 import com.qinkuai.core.dao.TaskDao;
+import com.qinkuai.core.model.Homework;
 import com.qinkuai.core.model.Task;
 import com.qinkuai.core.util.TimeUtils;
 
@@ -21,11 +24,17 @@ import com.qinkuai.core.util.TimeUtils;
 public class TaskController {
 	@Autowired
 	private TaskDao taskDao;
+	@Autowired
+	private HomeworkDao homeworkDao;
 	
 	@RequestMapping(value = "task-detail", method = RequestMethod.GET)
 	public String taskDetail(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("cid", "RJZ001_01");
-		request.setAttribute("taskid", 1);
+		int taskId = 1;
+		Task task = taskDao.selectById(taskId);
+		List<Homework> homeworks = homeworkDao.selectByTaskId(taskId);
+		request.setAttribute("task", task);
+		request.setAttribute("homeworks", homeworks);
 		return "task-detail";
 	}
 	

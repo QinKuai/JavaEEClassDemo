@@ -2,6 +2,7 @@ package com.qinkuai.webservice.service;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,18 +14,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.qinkuai.core.dao.HomeworkDao;
+import com.qinkuai.core.dao.StudentDao;
 import com.qinkuai.core.model.Homework;
+import com.qinkuai.core.model.Student;
 
 @Controller
 public class HomeworkController {
 	@Autowired
 	private HomeworkDao homeworkDao;
+	@Autowired
+	private StudentDao studentDao;
 	
 	@RequestMapping(value = "/homework-detail", method = RequestMethod.GET)
 	public String homeworkDetail(HttpServletRequest request, HttpServletResponse response) {
+		String studentId = "17301087";
+		int taskId = 1;
+		Student student = studentDao.selectById(studentId);
+		List<Homework> homeworks = homeworkDao.selectByCourseId(studentId, taskId);
 		request.setAttribute("cid", "RJZ001_01");
-		request.setAttribute("sid", "17301087");
-		request.setAttribute("taskId", 1);
+		request.setAttribute("student", student);
+		request.setAttribute("homeworks", homeworks);
 		return "homework-detail";
 	}
 	

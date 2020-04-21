@@ -1,6 +1,7 @@
 package com.qinkuai.webservice.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.qinkuai.core.dao.CourseSelectionDao;
 import com.qinkuai.core.dao.StudentDao;
+import com.qinkuai.core.dao.TaskDao;
 import com.qinkuai.core.model.Student;
+import com.qinkuai.core.model.Task;
 
 @Controller
 public class CourseController {
@@ -21,10 +24,18 @@ public class CourseController {
 	private CourseSelectionDao courseSelectionDao;
 	@Autowired
 	private StudentDao studentDao;
+	@Autowired
+	private TaskDao taskDao;
 	
 	@RequestMapping(value = "/course-detail", method = RequestMethod.GET)
 	public String courseDetail(HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("courseId", "RJZ001_01");
+		String courseId = "RJZ001_01";
+		List<Student> students = studentDao.selectAll();
+		List<Task> tasks = taskDao.selectByCourseId(courseId);
+		
+		request.setAttribute("courseId", courseId);
+		request.setAttribute("students", students);
+		request.setAttribute("tasks", tasks);
 		
 		return "course-detail";
 	}
@@ -40,7 +51,4 @@ public class CourseController {
 		request.setAttribute("courseId", cid);
 		response.sendRedirect("course-detail");
 	}
-	
-	
-	
 }

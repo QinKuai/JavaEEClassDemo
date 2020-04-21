@@ -1,9 +1,7 @@
 <%@page import="com.qinkuai.core.util.TimeUtils"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="com.qinkuai.core.dao.TaskDao"%>
 <%@page import="com.qinkuai.core.model.Task"%>
 <%@page import="com.qinkuai.core.model.Student"%>
-<%@page import="com.qinkuai.core.dao.StudentDao"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,7 +9,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%String courseId = (String)request.getAttribute("courseId"); %>
+<%
+	String courseId = (String)request.getAttribute("courseId"); 
+	List<Student> students = (List<Student>)request.getAttribute("students");
+	List<Task> tasks = (List<Task>)request.getAttribute("tasks");
+%>
 <title><%=courseId %>-课程详情</title>
 </head>
 <body>
@@ -22,7 +24,6 @@
 			<td>名字</td>
 		</tr>
 		<%
-			List<Student> students = StudentDao.getInstance().selectByCourseId(courseId);
 			for(Student student : students){
 		%>
 		<tr>
@@ -49,7 +50,6 @@
 			<td>截止日期</td>
 		</tr>
 		<%
-			List<Task> tasks = TaskDao.getInstance().selectByCourseId(courseId);
 			for(Task task : tasks){
 		%>
 		<tr>
