@@ -2,8 +2,8 @@ package com.qinkuai.webservice;
 
 import java.util.List;
 
-import com.qinkuai.core.dao.TaskDao;
-import com.qinkuai.core.model.Task;
+import com.qinkuai.db.dao.TaskDao;
+import com.qinkuai.db.model.Task;
 
 public class TestCore {
 	public static void main(String[] args) {

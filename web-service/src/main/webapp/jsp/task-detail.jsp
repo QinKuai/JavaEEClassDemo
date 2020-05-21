@@ -1,7 +1,7 @@
-<%@page import="com.qinkuai.core.model.Homework"%>
-<%@page import="com.qinkuai.core.model.Student"%>
+<%@page import="com.qinkuai.db.model.Homework"%>
+<%@page import="com.qinkuai.db.model.Student"%>
 <%@page import="com.qinkuai.core.util.TimeUtils"%>
-<%@page import="com.qinkuai.core.model.Task"%>
+<%@page import="com.qinkuai.db.model.Task"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

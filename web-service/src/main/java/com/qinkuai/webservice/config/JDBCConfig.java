@@ -3,10 +3,10 @@ package com.qinkuai.webservice.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.qinkuai.core.dao.CourseSelectionDao;
-import com.qinkuai.core.dao.HomeworkDao;
-import com.qinkuai.core.dao.StudentDao;
-import com.qinkuai.core.dao.TaskDao;
+import com.qinkuai.db.dao.CourseSelectionDao;
+import com.qinkuai.db.dao.HomeworkDao;
+import com.qinkuai.db.dao.StudentDao;
+import com.qinkuai.db.dao.TaskDao;
 
 /**
  * 

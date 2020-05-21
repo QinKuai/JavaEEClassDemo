@@ -14,11 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.qinkuai.core.dao.HomeworkDao;
-import com.qinkuai.core.dao.TaskDao;
-import com.qinkuai.core.model.Homework;
-import com.qinkuai.core.model.Task;
 import com.qinkuai.core.util.TimeUtils;
+import com.qinkuai.db.dao.HomeworkDao;
+import com.qinkuai.db.dao.TaskDao;
+import com.qinkuai.db.model.Homework;
+import com.qinkuai.db.model.Task;
 
 @Controller
 public class TaskController {

@@ -13,10 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.qinkuai.core.dao.HomeworkDao;
-import com.qinkuai.core.dao.StudentDao;
-import com.qinkuai.core.model.Homework;
-import com.qinkuai.core.model.Student;
+import com.qinkuai.db.dao.HomeworkDao;
+import com.qinkuai.db.dao.StudentDao;
+import com.qinkuai.db.model.Homework;
+import com.qinkuai.db.model.Student;
 
 @Controller
 public class HomeworkController {

@@ -1,9 +1,9 @@
 <%@page import="com.qinkuai.core.util.TimeUtils"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="com.qinkuai.core.dao.TaskDao"%>
-<%@page import="com.qinkuai.core.model.Task"%>
-<%@page import="com.qinkuai.core.model.Student"%>
-<%@page import="com.qinkuai.core.dao.StudentDao"%>
+<%@page import="com.qinkuai.db.dao.TaskDao"%>
+<%@page import="com.qinkuai.db.model.Task"%>
+<%@page import="com.qinkuai.db.model.Student"%>
+<%@page import="com.qinkuai.db.dao.StudentDao"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
