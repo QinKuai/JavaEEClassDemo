@@ -1,9 +1,9 @@
-package com.qinkuai.webservice;
+package com.qinkuai.web;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.qinkuai.db.config.RootConfig;
-import com.qinkuai.webservice.config.WebConfig;
+import com.qinkuai.web.config.WebConfig;
 
 
 public class MyWebApplicationIniter extends AbstractAnnotationConfigDispatcherServletInitializer{

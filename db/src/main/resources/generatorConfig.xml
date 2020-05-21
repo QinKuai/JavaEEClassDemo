@@ -41,7 +41,10 @@
         </commentGenerator>
 
         <!-- jdbc连接 -->
-        <jdbcConnection driverClass="${spring.datasource.driver-class-name}" connectionURL="${spring.datasource.url}" userId="${spring.datasource.username}" password="${spring.datasource.password}" />
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}" connectionURL="${spring.datasource.url}" userId="${spring.datasource.username}" password="${spring.datasource.password}" >
+        	<!-- 保证不会提取到其他数据库中同名表 -->
+        	<property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
         
         <!-- 类型转换 -->
         <javaTypeResolver>
@@ -66,11 +69,32 @@
         </javaClientGenerator>
         
         <!-- table可以有多个,每个数据库中的表都可以写一个table，tableName表示要匹配的数据库表,也可以在tableName属性中通过使用%通配符来匹配所有数据库表,只有匹配的表才会自动生成文件 -->
-        <table tableName="income_record" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+        <table tableName="course" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false" />
             
-            <generatedKey column="in_id" sqlStatement="Mysql" identity="true" />
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
         </table>
+        <table tableName="course_selection" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="false" />
+            
+            <generatedKey column="cid" sqlStatement="Mysql" identity="true" />
+        </table>
+        <table tableName="homework" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="false" />
+            
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>
+        <table tableName="student" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="false" />
+            
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>
+        <table tableName="task" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="false" />
+            
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>
+        
         
     </context>
 </generatorConfiguration>

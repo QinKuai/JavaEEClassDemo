@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -43,24 +42,17 @@ public class DbConfig {
 		return new HikariDataSource(hikariConfig);
 	}
 
-	/**
-	 * 事务Bean
-	 */
-	@Bean
-	public DataSourceTransactionManager transactionManager() {
-		return new DataSourceTransactionManager(dataSource());
-	}
 
 	/**
 	 * 配置Mybatis数据源及Mapper映射
 	 */
-//	@Bean
-//	public SqlSessionFactory sqlSessionFactory() throws Exception{
-//		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
-//		sessionFactoryBean.setDataSource(dataSource());
-//		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-//		sessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mapper/*Mapper.xml"));
-//		
-//		return sessionFactoryBean.getObject();
-//	}
+	@Bean
+	public SqlSessionFactory sqlSessionFactory() throws Exception{
+		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
+		sessionFactoryBean.setDataSource(dataSource());
+		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		sessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mapper/*Mapper.xml"));
+		
+		return sessionFactoryBean.getObject();
+	}
 }

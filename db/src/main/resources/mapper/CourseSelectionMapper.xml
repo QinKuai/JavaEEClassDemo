@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qinkuai.db.dao.CourseSelectionMapper">
+  <resultMap id="BaseResultMap" type="com.qinkuai.db.model.CourseSelection">
+    <id column="cid" jdbcType="VARCHAR" property="cid" />
+    <id column="sid" jdbcType="VARCHAR" property="sid" />
+    <result column="score" jdbcType="TINYINT" property="score" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from course_selection
+    where cid = #{cid,jdbcType=VARCHAR}
+      and sid = #{sid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qinkuai.db.model.CourseSelection">
+    insert into course_selection (cid, sid, score)
+    values (#{cid, jdbcType=VARCHAR}, #{sid,jdbcType=VARCHAR}, #{score,jdbcType=TINYINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.qinkuai.db.model.CourseSelection">
+    update course_selection
+    set score = #{score,jdbcType=TINYINT}
+    where cid = #{cid,jdbcType=VARCHAR}
+      and sid = #{sid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select cid, sid, score
+    from course_selection
+    where cid = #{cid,jdbcType=VARCHAR}
+      and sid = #{sid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select cid, sid, score
+    from course_selection
+  </select>
+</mapper>

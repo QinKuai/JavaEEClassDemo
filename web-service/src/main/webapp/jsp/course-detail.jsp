@@ -1,5 +1,4 @@
 <%@page import="com.qinkuai.core.util.TimeUtils"%>
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.qinkuai.db.model.Task"%>
 <%@page import="com.qinkuai.db.model.Student"%>
 <%@page import="java.util.List"%>

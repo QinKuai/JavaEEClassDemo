@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qinkuai.db.dao.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.qinkuai.db.model.Student">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="firstName" jdbcType="VARCHAR" property="firstName" />
+    <result column="lastName" jdbcType="VARCHAR" property="lastName" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="class" jdbcType="VARCHAR" property="className" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from student
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qinkuai.db.model.Student">
+    insert into student (id, firstName, lastName, sex, 
+      `class`, grade)
+    values (#{id, jdbcType=VARCHAR}, #{firstname,jdbcType=VARCHAR}, #{lastname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{class,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.qinkuai.db.model.Student">
+    update student
+    set firstName = #{firstname,jdbcType=VARCHAR},
+      lastName = #{lastname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      `class` = #{class,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, firstName, lastName, sex, `class`, grade
+    from student
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, firstName, lastName, sex, `class`, grade
+    from student
+  </select>
+  <select id="selectByCourseId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from student
+    where id in (select sid from course_selection
+    			where cid=#{cid, jdbcType=VARCHAR})
+  </select>
+</mapper>

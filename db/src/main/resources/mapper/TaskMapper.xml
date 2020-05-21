@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qinkuai.db.dao.TaskMapper">
+  <resultMap id="BaseResultMap" type="com.qinkuai.db.model.Task">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cid" jdbcType="VARCHAR" property="cid" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="time_last" jdbcType="INTEGER" property="timeLast" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from task
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qinkuai.db.model.Task">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into task (cid, content, upload_time, 
+      start_time, time_last)
+    values (#{cid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{timeLast,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.qinkuai.db.model.Task">
+    update task
+    set cid = #{cid,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      time_last = #{timeLast,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, cid, content, upload_time, start_time, time_last
+    from task
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, cid, content, upload_time, start_time, time_last
+    from task
+  </select>
+  <select id="selectByCourseId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, cid, content, upload_time, start_time, time_last
+    from task
+    where cid = #{cid, jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,4 +1,4 @@
-package com.qinkuai.webservice.aspect;
+package com.qinkuai.web.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.qinkuai.webservice.util.TransactionUtil;
+import com.qinkuai.web.transaction.TransactionUtil;
 
 @Component
 @Aspect
@@ -16,7 +16,7 @@ public class TransactionAspect {
 	@Autowired(required = false)
 	private TransactionUtil transactionUtil;
 	
-	@Pointcut("execution(** com.qinkuai.webservice.service..*.*(..))")
+	@Pointcut("execution(** com.qinkuai.web.controller..*.*(..))")
 	public void addTransaction() {}
 	
 	@AfterThrowing("addTransaction()")
