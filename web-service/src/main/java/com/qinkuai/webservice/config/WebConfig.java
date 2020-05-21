@@ -9,17 +9,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.validation.Validator;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
-import com.qinkuai.db.dao.DataBaseCP;
 
 /**
  * @author QinKuai
@@ -32,7 +27,7 @@ import com.qinkuai.db.dao.DataBaseCP;
 @Configuration
 @EnableWebMvc
 @EnableAspectJAutoProxy
-@ComponentScan(basePackages = {"com.qinkuai.webservice.service", "com.qinkuai.webservice.aspect", "com.qinkuai.webservice.util"})
+@ComponentScan(basePackages = {"com.qinkuai.webservice.controller", "com.qinkuai.webservice.aspect", "com.qinkuai.webservice.util"})
 public class WebConfig implements WebMvcConfigurer{
 	/**
 	 * 描述：
@@ -80,20 +75,5 @@ public class WebConfig implements WebMvcConfigurer{
 		registry.addResourceHandler("/static/css/**").addResourceLocations("WEB-INF/webapp/css/");
 		registry.addResourceHandler("/static/image/**").addResourceLocations("WEB-INF/webapp/image/");
 		//WebMvcConfigurer.super.addResourceHandlers(registry);
-	}
-	
-	/**
-	 * 描述：
-	 * 配置校验Bean
-	 * 启动Springmvc的校验机制
-	 */
-	@Override
-	public Validator getValidator() {
-		return new LocalValidatorFactoryBean();
-	}
-	
-	@Bean
-	public DataSourceTransactionManager transactionManager() {
-		return new DataSourceTransactionManager(DataBaseCP.getConnectionPool());
 	}
 }

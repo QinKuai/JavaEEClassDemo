@@ -2,7 +2,7 @@ package com.qinkuai.webservice;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import com.qinkuai.webservice.config.RootConfig;
+import com.qinkuai.db.config.RootConfig;
 import com.qinkuai.webservice.config.WebConfig;
 
 
