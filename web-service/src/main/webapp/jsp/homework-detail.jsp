@@ -21,6 +21,7 @@
 		<tr>
 			<td>作业内容</td>
 			<td>作业提交时间</td>
+			<td>更新</td>
 		</tr>
 		
 		<%
@@ -29,6 +30,7 @@
 		<tr>
 			<td><%=homework.getContent() %></td>
 			<td><%=TimeUtils.dateToString(homework.getUploadTime()) %></td>
+			<td><button onclick="updateHomework()">更新</button></td>
 		</tr>
 
 		<%
@@ -40,6 +42,11 @@
 	<script type="text/javascript">
 		function jumpToAddNewHomework() {
 			window.location.href = "add-homework"
+		}
+	</script>
+	<script type="text/javascript">
+		function updateHomework() {
+			window.location.href = "update-homework"
 		}
 	</script>
 </body>

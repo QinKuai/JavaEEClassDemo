@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.qinkuai.db.dao.CourseSelectionMapper;
 import com.qinkuai.db.dao.StudentMapper;
@@ -29,7 +29,7 @@ public class CourseController {
 	@Autowired
 	private TaskMapper taskDao;
 	
-	@RequestMapping(value = "/course-detail", method = RequestMethod.GET)
+	@GetMapping(value = "/course-detail")
 	public String courseDetail(HttpServletRequest request, HttpServletResponse response) {
 		String courseId = "RJZ001_01";
 		List<Student> students = studentDao.selectByCourseId(courseId);
@@ -42,7 +42,7 @@ public class CourseController {
 		return "course-detail";
 	}
 
-	@RequestMapping(value = "/add-student-to-course")
+	@PostMapping(value = "/add-student-to-course")
 	public void addStudentToCourse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		Student student = studentDao.selectByPrimaryKey(request.getParameter("sid"));
 		String cid = request.getParameter("cid");

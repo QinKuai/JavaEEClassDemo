@@ -2,12 +2,14 @@ package com.qinkuai.db.model;
 
 import java.util.Objects;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
-public class Student {
-	// 学生ID
-	private String id;
+@Setter
+@Getter
+@ToString(callSuper = true)
+public class Student extends AbstractUser{
 	// 学生姓
 	private String firstName;
 	// 学生名

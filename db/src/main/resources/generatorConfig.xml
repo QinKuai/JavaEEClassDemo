@@ -69,6 +69,7 @@
         </javaClientGenerator>
         
         <!-- table可以有多个,每个数据库中的表都可以写一个table，tableName表示要匹配的数据库表,也可以在tableName属性中通过使用%通配符来匹配所有数据库表,只有匹配的表才会自动生成文件 -->
+        <!-- 
         <table tableName="course" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false" />
             
@@ -94,7 +95,11 @@
             
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
         </table>
-        
-        
+         -->
+        <table tableName="teacher" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="false" />
+            
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>
     </context>
 </generatorConfiguration>
